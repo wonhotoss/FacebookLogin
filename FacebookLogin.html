@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script>
+    function checkLoginState()
+    {
+        FB.getLoginStatus( function (response)
+        {
+            if (response.status === 'connected')
+            {
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+                FB.api('/me', function (response)
+                {
+                    document.getElementById('accesstoken').appendChild( document.createTextNode(accessToken));
+                    console.log('Successful login for: ' + response.name);
+                } );
+            }
+            else if (response.status === 'not_authorized')
+            {
+            }
+            else
+            {
+            }
+        } );
+    }
+
+    window.fbAsyncInit = function ()
+    {
+        FB.init(
+        {
+            appId: '1565844423659939',
+            cookie: true,  // enable cookies to allow the server to access
+            // the session
+            xfbml: true,  // parse social plugins on this page
+            version: 'v2.2' // use version 2.2
+        } );
+
+        checkLoginState();
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = '//connect.facebook.net/ko_KR/sdk.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class='fb-login-button' data-max-rows='1' data-size='xlarge' data-show-faces='false' data-auto-logout-link='false' onlogin='checkLoginState()'></div>
+<div>access token</div>
+<div id='accesstoken'></div>
+
+<button onclick="echo()">Click me</button>
+
+
+</body>
+</html>
