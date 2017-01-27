@@ -16,7 +16,7 @@
                 FB.api('/me', function (response)
                 {
                     document.getElementById('accesstoken').appendChild( document.createTextNode(accessToken));
-                    console.log('Successful login for: ' + response.name);
+                    console.log( response );
                 } );
             }
             else if (response.status === 'not_authorized')
