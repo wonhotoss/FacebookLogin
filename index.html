@@ -28,13 +28,14 @@
         } );
     }
     
-    console.log( window.location.search );
-
+    // URL?AppID
+    var appIDquery = window.location.search.substr( 1 );
+    
     window.fbAsyncInit = function ()
     {
         FB.init(
         {
-            appId: '1627364160904916',
+            appId: appIDquery,//'1627364160904916',
             cookie: true,  // enable cookies to allow the server to access
             // the session
             xfbml: true,  // parse social plugins on this page
