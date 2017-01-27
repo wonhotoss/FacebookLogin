@@ -7,16 +7,16 @@
 <script>
     function checkLoginState()
     {
-        FB.getLoginStatus( function (response)
+        FB.getLoginStatus( function ( loginResponse )
         {
-            if (response.status === 'connected')
+            if( loginResponse.status === 'connected' )
             {
-                var uid = response.authResponse.userID;
-                var accessToken = response.authResponse.accessToken;
-                FB.api('/me', function (response)
+                var uid = loginResponse.authResponse.userID;
+                var accessToken = loginResponse.authResponse.accessToken;
+                FB.api( '/me', function ( meResponse )
                 {
-                    document.getElementById('accesstoken').appendChild( document.createTextNode(accessToken));
-                    console.log( response );
+                    document.getElementById('accesstoken').appendChild( document.createTextNode( accessToken ) );
+                    console.log( meResponse );
                 } );
             }
             else if (response.status === 'not_authorized')
