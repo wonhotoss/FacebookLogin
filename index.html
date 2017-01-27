@@ -11,12 +11,13 @@
         {
             if( loginResponse.status === 'connected' )
             {
+                console.log( loginResponse );
                 var uid = loginResponse.authResponse.userID;
                 var accessToken = loginResponse.authResponse.accessToken;
                 FB.api( '/me', function ( meResponse )
                 {
-                    document.getElementById('accesstoken').appendChild( document.createTextNode( accessToken ) );
                     console.log( meResponse );
+                    document.getElementById('accesstoken').appendChild( document.createTextNode( accessToken ) );
                 } );
             }
             else if (response.status === 'not_authorized')
